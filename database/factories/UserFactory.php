@@ -41,4 +41,11 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    public function withSanctumToken(): static
+    {
+        return $this->afterCreating(function ($user) {
+            $user->createToken('test');
+        });
+    }
 }
