@@ -15,7 +15,7 @@ class SocialMediaController extends Controller
 
     public function redirectToProvider($provider): RedirectResponse
     {
-        return Socialite::driver($provider)->redirect();
+        return Socialite::driver($provider)->stateless()->redirect();
     }
 
     public function handleProviderCallback($provider)
