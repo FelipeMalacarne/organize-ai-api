@@ -1,4 +1,15 @@
 services:
+    ngrok:
+        image: 'ngrok/ngrok:alpine'
+        environment:
+            NGROK_AUTHTOKEN: '${NGROK_TOKEN}'
+        command: 'http --domain=${NGROK_DOMAIN} laravel.test:80'
+        ports:
+            - '4040:4040'
+        networks:
+            - sail
+        depends_on:
+            - laravel.test
     laravel.test:
         build:
             context: ./vendor/laravel/sail/runtimes/8.3
