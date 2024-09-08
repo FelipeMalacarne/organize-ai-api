@@ -58,7 +58,7 @@ return [
 
         'gcs' => [
             'driver' => 'gcs',
-            'bucket' => env('GOOGLE_CLOUD_STORAGE_BUCKET', 'social-q-medias'),
+            'bucket' => env('GOOGLE_CLOUD_STORAGE_BUCKET', 'organizeai-documents'),
             'path_prefix' => env('GOOGLE_CLOUD_STORAGE_PATH_PREFIX', ''),
             'storage_api_uri' => env('GOOGLE_CLOUD_STORAGE_API_URI', null),
             'api_endpoint' => env('GOOGLE_CLOUD_STORAGE_API_ENDPOINT', null),

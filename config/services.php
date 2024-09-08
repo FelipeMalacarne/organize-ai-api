@@ -38,6 +38,6 @@ return [
     'linkedin-openid' => [
         'client_id' => env('LINKEDIN_CLIENT_ID'),
         'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
-        'redirect' => env('APP_URL').'/api/login/linkedin-openid/callback',
+        'redirect' => env('LINKEDIN_REDIRECT_URI'),
     ],
 ];
