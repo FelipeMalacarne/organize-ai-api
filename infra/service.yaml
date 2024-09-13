@@ -15,6 +15,7 @@ spec:
         run.googleapis.com/execution-environment: gen2
         run.googleapis.com/container-dependencies: '{"nginx":["php-fpm"]}'
         revision-timestamp: "{{timestamp}}"
+        run.googleapis.com/cloudsql-instances: "organize-ai-app:southamerica-east1:pgsql"
     spec:
       containerConcurrency: 1
       containers:
@@ -36,8 +37,263 @@ spec:
         - name: php-fpm
           image: "southamerica-east1-docker.pkg.dev/organize-ai-app/default/php-fpm:latest"
           env:
-            - name: PORT
-              value: "9000"
+          - name: APP_NAME
+            valueFrom:
+                secretKeyRef:
+                  name: APP_NAME
+                  key: latest
+          - name: APP_ENV
+            valueFrom:
+              secretKeyRef:
+                name: APP_ENV
+                key: latest
+          - name: APP_KEY
+            valueFrom:
+              secretKeyRef:
+                name: APP_KEY
+                key: latest
+          - name: APP_DEBUG
+            valueFrom:
+              secretKeyRef:
+                name: APP_DEBUG
+                key: latest
+          - name: APP_TIMEZONE
+            valueFrom:
+              secretKeyRef:
+                name: APP_TIMEZONE
+                key: latest
+          - name: APP_URL
+            valueFrom:
+              secretKeyRef:
+                name: APP_URL
+                key: latest
+          - name: APP_LOCALE
+            valueFrom:
+              secretKeyRef:
+                name: APP_LOCALE
+                key: latest
+          - name: APP_FALLBACK_LOCALE
+            valueFrom:
+              secretKeyRef:
+                name: APP_FALLBACK_LOCALE
+                key: latest
+          - name: APP_FAKER_LOCALE
+            valueFrom:
+              secretKeyRef:
+                name: APP_FAKER_LOCALE
+                key: latest
+          - name: APP_MAINTENANCE_DRIVER
+            valueFrom:
+              secretKeyRef:
+                name: APP_MAINTENANCE_DRIVER
+                key: latest
+          - name: BCRYPT_ROUNDS
+            valueFrom:
+              secretKeyRef:
+                name: BCRYPT_ROUNDS
+                key: latest
+          - name: LOG_CHANNEL
+            valueFrom:
+              secretKeyRef:
+                name: LOG_CHANNEL
+                key: latest
+          - name: LOG_STACK
+            valueFrom:
+              secretKeyRef:
+                name: LOG_STACK
+                key: latest
+          - name: LOG_DEPRECATIONS_CHANNEL
+            valueFrom:
+              secretKeyRef:
+                name: LOG_DEPRECATIONS_CHANNEL
+                key: latest
+          - name: LOG_LEVEL
+            valueFrom:
+              secretKeyRef:
+                name: LOG_LEVEL
+                key: latest
+          - name: DB_CONNECTION
+            valueFrom:
+              secretKeyRef:
+                name: DB_CONNECTION
+                key: latest
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: DB_HOST
+                key: latest
+          - name: DB_PORT
+            valueFrom:
+              secretKeyRef:
+                name: DB_PORT
+                key: latest
+          - name: DB_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: DB_DATABASE
+                key: latest
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: DB_USERNAME
+                key: latest
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: DB_PASSWORD
+                key: latest
+          - name: SESSION_DRIVER
+            valueFrom:
+              secretKeyRef:
+                name: SESSION_DRIVER
+                key: latest
+          - name: SESSION_LIFETIME
+            valueFrom:
+              secretKeyRef:
+                name: SESSION_LIFETIME
+                key: latest
+          - name: SESSION_ENCRYPT
+            valueFrom:
+              secretKeyRef:
+                name: SESSION_ENCRYPT
+                key: latest
+          - name: SESSION_PATH
+            valueFrom:
+              secretKeyRef:
+                name: SESSION_PATH
+                key: latest
+          - name: SESSION_DOMAIN
+            valueFrom:
+              secretKeyRef:
+                name: SESSION_DOMAIN
+                key: latest
+          - name: BROADCAST_CONNECTION
+            valueFrom:
+              secretKeyRef:
+                name: BROADCAST_CONNECTION
+                key: latest
+          - name: FILESYSTEM_DISK
+            valueFrom:
+              secretKeyRef:
+                name: FILESYSTEM_DISK
+                key: latest
+          - name: QUEUE_CONNECTION
+            valueFrom:
+              secretKeyRef:
+                name: QUEUE_CONNECTION
+                key: latest
+          - name: CACHE_STORE
+            valueFrom:
+              secretKeyRef:
+                name: CACHE_STORE
+                key: latest
+          - name: MEMCACHED_HOST
+            valueFrom:
+              secretKeyRef:
+                name: MEMCACHED_HOST
+                key: latest
+          - name: REDIS_CLIENT
+            valueFrom:
+              secretKeyRef:
+                name: REDIS_CLIENT
+                key: latest
+          - name: REDIS_HOST
+            valueFrom:
+              secretKeyRef:
+                name: REDIS_HOST
+                key: latest
+          - name: REDIS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: REDIS_PASSWORD
+                key: latest
+          - name: REDIS_PORT
+            valueFrom:
+              secretKeyRef:
+                name: REDIS_PORT
+                key: latest
+          - name: MAIL_MAILER
+            valueFrom:
+              secretKeyRef:
+                name: MAIL_MAILER
+                key: latest
+          - name: MAIL_HOST
+            valueFrom:
+              secretKeyRef:
+                name: MAIL_HOST
+                key: latest
+          - name: MAIL_PORT
+            valueFrom:
+              secretKeyRef:
+                name: MAIL_PORT
+                key: latest
+          - name: MAIL_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: MAIL_USERNAME
+                key: latest
+          - name: MAIL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: MAIL_PASSWORD
+                key: latest
+          - name: MAIL_ENCRYPTION
+            valueFrom:
+              secretKeyRef:
+                name: MAIL_ENCRYPTION
+                key: latest
+          - name: MAIL_FROM_ADDRESS
+            valueFrom:
+              secretKeyRef:
+                name: MAIL_FROM_ADDRESS
+                key: latest
+          - name: MAIL_FROM_NAME
+            valueFrom:
+              secretKeyRef:
+                name: MAIL_FROM_NAME
+                key: latest
+          - name: LINKEDIN_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: LINKEDIN_CLIENT_ID
+                key: latest
+          - name: LINKEDIN_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: LINKEDIN_CLIENT_SECRET
+                key: latest
+          - name: LINKEDIN_REDIRECT_URI
+            valueFrom:
+              secretKeyRef:
+                name: LINKEDIN_REDIRECT_URI
+                key: latest
+          - name: META_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: META_CLIENT_ID
+                key: latest
+          - name: META_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: META_CLIENT_SECRET
+                key: latest
+          - name: GOOGLE_APPLICATION_CREDENTIALS
+            valueFrom:
+              secretKeyRef:
+                name: GOOGLE_APPLICATION_CREDENTIALS
+                key: latest
+          - name: GOOGLE_CLOUD_STORAGE_BUCKET
+            valueFrom:
+              secretKeyRef:
+                name: GOOGLE_CLOUD_STORAGE_BUCKET
+                key: latest
+          - name: ENV
+            valueFrom:
+              secretKeyRef:
+                key: latest
+                name: laravel_production
+          - name: PORT
+            value: "9000"
           resources:
             limits:
               cpu: 1000m
@@ -48,4 +304,3 @@ spec:
             failureThreshold: 1
             tcpSocket:
               port: 9000
-# [END cloudrun_mc_hello_php_nginx_mc]

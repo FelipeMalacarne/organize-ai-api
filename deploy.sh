@@ -11,6 +11,10 @@ wait
 
 echo "Both builds have completed successfully."
 
-gcloud run services replace infra/service.yaml
+gcloud run jobs execute migrate --region ${REGION} --wait &
+
+gcloud run services replace infra/service.yaml &
+
+wait
 
 echo "Cloud Run service has been replaced successfully."
