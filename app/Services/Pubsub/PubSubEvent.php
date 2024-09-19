@@ -33,4 +33,14 @@ class PubSubEvent
             Config::get('queue.connections.pubsub.queue'),
         );
     }
+
+    // TODO: implement the logic later of dispatching laravel events using messages from GCP pubsub
+    public function dispatchEvent(): void
+    {
+        $eventClass = $this->message->data()['event'];
+
+        $attributes = $this->message->attributes();
+
+        event( new $eventClass($attributes) );
+    }
 }
