@@ -27,7 +27,7 @@ create_secret() {
   echo -n "$secret_value" | gcloud secrets versions add "$secret_name" --data-file=- --project="$PROJECT_ID"
 }
 
-# Read the .env.production file and create secrets
+# Read the .env.production file and create secrets in parallel
 while IFS='=' read -r key value; do
   # Ignore lines that are comments or empty
   if [[ "$key" =~ ^#.*$ ]] || [[ -z "$key" ]]; then
@@ -37,8 +37,12 @@ while IFS='=' read -r key value; do
   # Remove quotes from the value if they exist
   value=$(echo "$value" | sed -e 's/^"//' -e 's/"$//')
 
-  # Create a secret for each environment variable
-  create_secret "$key" "$value"
+  # Create a secret for each environment variable in parallel
+  create_secret "$key" "$value" &
+
 done < "$ENV_FILE"
+
+# Wait for all background jobs to complete
+wait
 
 echo "All secrets from $ENV_FILE have been created or updated successfully."
