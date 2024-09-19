@@ -77,7 +77,10 @@ return [
             'queue' => env('PUBSUB_QUEUE', 'laravel-queue'),
             'project_id' => env('PUBSUB_PROJECT_ID', 'organize-ai-app'),
             'retries' => 3,
-            'request_timeout' => 60
+            'request_timeout' => 60,
+            'subscriber' => 'dev-laravel-queue-sub',
+            'create_topics' => true,
+            'create_subscriptions' => true,
         ],
     ],
 

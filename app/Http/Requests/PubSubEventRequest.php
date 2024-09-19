@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Services\Pubsub\Message;
+use Google\Cloud\PubSub\Message;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Arr;
 
 class PubSubEventRequest extends FormRequest
 {
@@ -19,9 +20,9 @@ class PubSubEventRequest extends FormRequest
     {
         $requestData = $this->all();
 
-        $requestData['message']['data'] = base64_decode($requestData['message']['data'], true);
+        Arr::set($requestData, 'message.data', base64_decode(Arr::get($requestData,'message.data'), true));
 
-        return new Message($requestData['message']);
+        return new Message(Arr::get($requestData, 'message'));
     }
 
     /**
