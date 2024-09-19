@@ -10,18 +10,23 @@ class EchoOutput implements ShouldQueue
 {
     use Queueable;
 
+    public $tries = 3;
+
     /**
      * Create a new job instance.
      */
     public function __construct(
-        protected \Carbon\Carbon $message
-    ) {}
+        protected $message
+    ) {
+    }
 
     /**
      * Execute the job.
      */
     public function handle(): void
     {
+        throw new \Exception('This is a test exception');
         Log::info('Job sent at '.$this->message->format('Y-m-d H:i:s'));
+
     }
 }
