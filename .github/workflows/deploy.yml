@@ -1,0 +1,52 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          export_default_credentials: true
+
+      - name: Configure Docker to use Artifact Registry
+        run: |
+          gcloud auth configure-docker ${REGISTRY}
+
+        env:
+          REGISTRY: "${{ secrets.GCP_REGION }}-docker.pkg.dev"
+
+      - name: Build and Push Docker Image
+        run: |
+          IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPO_NAME }}/laravel:${{ github.sha }}
+          echo "Building Docker image: $IMAGE_TAG"
+          docker build -t $IMAGE_TAG .
+          docker push $IMAGE_TAG
+        env:
+          REGISTRY: "${{ secrets.GCP_REGION }}-docker.pkg.dev"
+
+      - name: Execute Cloud Run Migrations Job
+        run: |
+          gcloud run jobs execute migrate \
+            --region=${{ secrets.GCP_REGION }} \
+            --image=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPO_NAME }}/laravel:${{ github.sha }} \
+            --wait
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run services update laravel \
+            --image=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPO_NAME }}/laravel:${{ github.sha }} \
+            --region=${{ secrets.GCP_REGION }} \
+            --platform=managed \
+            --quiet
