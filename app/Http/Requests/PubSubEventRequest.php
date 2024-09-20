@@ -20,7 +20,7 @@ class PubSubEventRequest extends FormRequest
     {
         $requestData = $this->all();
 
-        Arr::set($requestData, 'message.data', base64_decode(Arr::get($requestData,'message.data'), true));
+        Arr::set($requestData, 'message.data', base64_decode(Arr::get($requestData, 'message.data'), true));
 
         return new Message(Arr::get($requestData, 'message'));
     }

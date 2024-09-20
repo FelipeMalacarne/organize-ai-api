@@ -7,7 +7,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 
 $settingsDir = $_ENV['APP_SETTINGS_DIR'] ?? '/config';
 
-if (file_exists($settingsDir . '/.env')) {
+if (file_exists($settingsDir.'/.env')) {
     $dotenv = Dotenv::createImmutable($settingsDir);
     $dotenv->safeLoad(); // Use safeLoad to prevent exceptions if .env is missing
 }

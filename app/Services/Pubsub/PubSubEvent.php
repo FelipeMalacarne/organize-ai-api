@@ -41,6 +41,6 @@ class PubSubEvent
 
         $attributes = $this->message->attributes();
 
-        event( new $eventClass($attributes) );
+        event(new $eventClass($attributes));
     }
 }

@@ -17,8 +17,7 @@ class EchoOutput implements ShouldQueue
      */
     public function __construct(
         protected $message
-    ) {
-    }
+    ) {}
 
     /**
      * Execute the job.

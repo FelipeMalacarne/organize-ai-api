@@ -11,9 +11,8 @@ class SanctumRegister implements RegisterService
         string $email,
         string $password,
         string $name,
-        ?string $deviceName='default'
-    ): string
-    {
+        ?string $deviceName = 'default'
+    ): string {
         $user = User::create([
             'name' => $name,
             'email' => $email,
