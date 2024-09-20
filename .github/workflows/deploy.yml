@@ -10,52 +10,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout Repository
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Authenticate to Google Cloud
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
-      # Step 3: Set up Cloud SDK
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-          # Optional: Specify the version of gcloud
-          # version: '393.0.0'
-          # Optional: Install additional components if needed
-          # install_components: 'beta'
 
-      # Debug Step: Verify gcloud Authentication
-      - name: Verify gcloud Authentication
-        run: |
-          echo "Active gcloud accounts:"
-          gcloud auth list
-          echo "Current project:"
-          gcloud config get-value project
-
-      # Step 4: List Artifact Registry Repositories
-      - name: List Artifact Registry Repositories
-        run: |
-          gcloud artifacts repositories list --project=${{ secrets.GCP_PROJECT_ID }} --location=${{ secrets.GCP_REGION }}
-
-      # Step 5: Configure Docker to use Artifact Registry
       - name: Configure Docker to use Artifact Registry
         run: |
           gcloud auth configure-docker ${REGISTRY}
         env:
           REGISTRY: "${{ secrets.GCP_REGION }}-docker.pkg.dev"
 
-      # Debug Step: Verify Docker Authentication
-      - name: Verify Docker Authentication
-        run: |
-          docker info
-
-      # Step 6: Build and Push Docker Image
       - name: Build and Push Docker Image
         run: |
           IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPO_NAME }}/laravel:${{ github.sha }}
@@ -65,19 +38,13 @@ jobs:
         env:
           REGISTRY: "${{ secrets.GCP_REGION }}-docker.pkg.dev"
 
-      # Step 7: Execute Cloud Run Migrations Job
       - name: Execute Cloud Run Migrations Job
         run: |
-          gcloud run jobs execute migrate \
-            --region=${{ secrets.GCP_REGION }} \
-            --image=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPO_NAME }}/laravel:${{ github.sha }} \
-            --wait
+          gcloud run jobs execute migrate --region ${REGION} --wait
 
-      # Step 8: Deploy to Cloud Run
       - name: Deploy to Cloud Run
         run: |
           gcloud run services update laravel \
-            --image=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPO_NAME }}/laravel:${{ github.sha }} \
-            --region=${{ secrets.GCP_REGION }} \
-            --platform=managed \
+            --image ${REGISTRY_NAME}/laravel \
+            --region ${REGION} \
             --quiet
