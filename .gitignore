@@ -24,3 +24,4 @@ cert-private.pem
 cert.pem
 .env.yaml
 .env.gcloudvars
+.env.gcloud

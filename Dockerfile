@@ -2,6 +2,8 @@ FROM php:8.3-fpm-alpine
 
 WORKDIR /var/www
 
+ARG TARGETARCH
+
 RUN apk --update add wget \
   curl \
   git \
@@ -19,16 +21,17 @@ RUN apk --update add wget \
   libgsasl-dev \
   oniguruma-dev \
   postgresql-dev \
-  libzip-dev
+  libzip-dev \
+  nginx
 
 RUN docker-php-ext-install mbstring \
-    pdo_pgsql \
-    xml
+  pdo_pgsql \
+  xml
 
 COPY . /var/www
-
-COPY ./infra/php-fpm/php.ini /usr/local/etc/php/conf.d/zz-extra.ini
-COPY ./infra/php-fpm/php.conf /usr/local/etc/php-fpm.d/zz-extra.conf
+COPY ./infra/nginx.conf /etc/nginx/nginx.conf
+COPY ./infra/php.ini /usr/local/etc/php/conf.d/zz-extra.ini
+COPY ./infra/php.conf /usr/local/etc/php-fpm.d/zz-extra.conf
 
 COPY --chown=www-data:www-data . /var/www
 RUN chown -R www-data:www-data /var/www \
@@ -39,6 +42,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN composer install --no-dev --optimize-autoloader
 
-EXPOSE 9000
+EXPOSE 8080
 
-CMD ["php-fpm"]
+RUN ["chmod", "+x", "startup.sh"]
+
+CMD sh /var/www/startup.sh
