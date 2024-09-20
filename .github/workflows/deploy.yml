@@ -29,14 +29,9 @@ jobs:
         env:
           REGISTRY: "${{ secrets.GCP_REGION }}-docker.pkg.dev"
 
-      - name: Build and Push Docker Image
+      - name: Build Image on Artifact Registry
         run: |
-          IMAGE_TAG=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPO_NAME }}/laravel:${{ github.sha }}
-          echo "Building Docker image: $IMAGE_TAG"
-          docker build -t $IMAGE_TAG .
-          docker push $IMAGE_TAG
-        env:
-          REGISTRY: "${{ secrets.GCP_REGION }}-docker.pkg.dev"
+          gcloud builds submit --tag=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPO_NAME }}/laravel:${{ github.sha }} .
 
       - name: Execute Cloud Run Migrations Job
         run: |
@@ -48,5 +43,3 @@ jobs:
             --image ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPO_NAME }}/laravel:${{ github.sha }} \
             --region ${{secrets.GCP_REGION}} \
             --quiet
-        env:
-          REGISTRY: "${{ secrets.GCP_REGION }}-docker.pkg.dev"
