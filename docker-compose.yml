@@ -1,11 +1,10 @@
 services:
-    ngrok:
-        image: 'ngrok/ngrok:alpine'
-        environment:
-            NGROK_AUTHTOKEN: '${NGROK_TOKEN}'
-        command: 'http --domain=${NGROK_DOMAIN} laravel.test:80'
-        ports:
-            - '4040:4040'
+    cloudflare:
+        image: cloudflare/cloudflared:2024.5.0
+        depends_on:
+            nginx:
+                condition: service_started
+        command: tunnel --no-autoupdate run --token ${CFARGOTUNNEL_TOKEN}
         networks:
             - sail
         depends_on:
