@@ -48,7 +48,7 @@ jobs:
         run: |
           gcloud auth configure-docker ${REGISTRY}
         env:
-          REGISTRY: "${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPO_NAME }}"
+          REGISTRY: "${{ secrets.GCP_REGION }}-docker.pkg.dev"
 
       # Debug Step: Verify Docker Authentication
       - name: Verify Docker Authentication
@@ -63,7 +63,7 @@ jobs:
           docker build -t $IMAGE_TAG .
           docker push $IMAGE_TAG
         env:
-          REGISTRY: "${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPO_NAME }}"
+          REGISTRY: "${{ secrets.GCP_REGION }}-docker.pkg.dev"
 
       # Step 7: Execute Cloud Run Migrations Job
       - name: Execute Cloud Run Migrations Job
