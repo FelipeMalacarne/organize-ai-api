@@ -29,11 +29,11 @@ class Document extends Model
         return $this->belongsTo(User::class);
     }
 
-    // public function extractions(): HasMany
-    // {
-    //     return $this->hasMany(Extraction::class);
-    // }
-    //
+    public function extractions(): HasMany
+    {
+        return $this->hasMany(Extraction::class);
+    }
+
     // public function tags(): BelongsToMany
     // {
     //     return $this->belongsToMany(Tag::class)->withTimestamps();
