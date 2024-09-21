@@ -34,8 +34,8 @@ class Document extends Model
         return $this->hasMany(Extraction::class);
     }
 
-    // public function tags(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(Tag::class)->withTimestamps();
-    // }
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class)->withTimestamps();
+    }
 }
