@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\PubSubController;
 use App\Http\Controllers\SocialMediaController;
 use App\Jobs\EchoOutput;
@@ -19,7 +20,11 @@ Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanct
 Route::get('login/{provider}', [SocialMediaController::class, 'redirectToProvider']);
 Route::get('login/{provider}/callback', [SocialMediaController::class, 'handleProviderCallback']);
 
-Route::get('test', fn () => response()->json(['message' => 'hello world']));
+Route::middleware('auth:sanctum')->group(function (){
+    Route::apiResource('document', DocumentController::class);
+
+});
+
 
 Route::get('queue', function () {
     EchoOutput::dispatch(Carbon::now());
