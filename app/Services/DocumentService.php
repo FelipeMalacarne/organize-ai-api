@@ -6,6 +6,7 @@ use App\Contracts\DocumentService as DocumentServiceContract;
 use App\Events\Document\Uploaded as DocumentUploaded;
 use App\Models\Document;
 use App\Models\Tag;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -39,7 +40,7 @@ class DocumentService implements DocumentServiceContract
         return $document;
     }
 
-    public function getAlldocuments(int $userId, array $filters = []): Collection
+    public function getAlldocuments(int $userId, array $filters = []): LengthAwarePaginator
     {
         $query = Document::where('user_id', $userId)
             ->with(['tags', 'extractions']);
