@@ -25,8 +25,8 @@ class Tag extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function scopeForUser($query, User $user)
+    public function scopeForUser($query, int $user_id)
     {
-        return $query->where('user_id', $user->id)->orWhereNull('user_id');
+        return $query->where('user_id', $user_id)->orWhereNull('user_id');
     }
 }

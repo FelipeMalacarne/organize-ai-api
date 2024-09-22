@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('file_type'); // e.g., pdf, jpg, png
             $table->json('metadata')->nullable(); // Additional data for ML
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
