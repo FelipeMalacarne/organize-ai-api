@@ -5,7 +5,6 @@ namespace App\Contracts;
 use Illuminate\Http\UploadedFile;
 use App\Models\Document;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 
 interface DocumentService
 {
