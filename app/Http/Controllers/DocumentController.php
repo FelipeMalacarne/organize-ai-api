@@ -92,4 +92,16 @@ class DocumentController extends Controller
             'message' => 'Document deleted successfully',
         ]);
     }
+
+    public function download(string $id)
+    {
+        $document = $this->service->getDocumentById($id, Auth::user()->id);
+        if (! $document) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Document not found',
+                        ], 404);
+        }
+        return $this->service->generateDownloadUrl($document);
+    }
 }

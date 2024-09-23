@@ -51,9 +51,9 @@ class DocumentService implements DocumentServiceContract
         return $query->paginate(Arr::get($filters, 'limit', 20), ['*'], 'page', Arr::get($filters, 'page', 1));
     }
 
-    public function getDocumentById(int $id, int $userId): ?Document
+    public function getDocumentById(string $id, int $userId): ?Document
     {
-        return Document::where('id', $id)
+        return Document::whereSqid($id)
             ->where('user_id', $userId)
             ->with(['tags', 'extractions'])
             ->first();
