@@ -11,6 +11,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.15",
         "laravel/tinker": "^2.9",
+        "red-explosion/laravel-sqids": "^1.2",
         "spatie/laravel-google-cloud-storage": "^2.3"
     },
     "require-dev": {

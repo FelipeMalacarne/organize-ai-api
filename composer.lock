@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "56d96fabd1de71589930f401d006e95e",
+    "content-hash": "1197a2d914476870a32d9f68bd32e0b4",
     "packages": [
         {
             "name": "brick/math",
@@ -4298,6 +4298,72 @@
             "time": "2024-04-27T21:32:50+00:00"
         },
         {
+            "name": "red-explosion/laravel-sqids",
+            "version": "v1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/red-explosion/laravel-sqids.git",
+                "reference": "e813f2d36af7da23872015f1407dce768a9fbb55"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/red-explosion/laravel-sqids/zipball/e813f2d36af7da23872015f1407dce768a9fbb55",
+                "reference": "e813f2d36af7da23872015f1407dce768a9fbb55",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "illuminate/contracts": "^10.0|^11.0",
+                "illuminate/support": "^10.0|^11.0",
+                "php": "^8.2",
+                "sqids/sqids": "^0.4.1"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.10",
+                "orchestra/testbench": "^8.0|^9.0",
+                "pestphp/pest": "^2.6",
+                "pestphp/pest-plugin-arch": "^2.1",
+                "phpstan/phpstan": "^1.10",
+                "red-explosion/pint-config": "^1.1",
+                "spatie/laravel-ray": "^1.32"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RedExplosion\\Sqids\\SqidsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RedExplosion\\Sqids\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Sherred",
+                    "email": "ben@sherred.co.uk"
+                }
+            ],
+            "description": "Easily generate Stripe/YouTube looking IDs for your Laravel models.",
+            "homepage": "https://github.com/red-explosion/laravel-sqids",
+            "keywords": [
+                "laravel",
+                "laravel-sqids",
+                "red-explosion"
+            ],
+            "support": {
+                "issues": "https://github.com/red-explosion/laravel-sqids/issues",
+                "source": "https://github.com/red-explosion/laravel-sqids/tree/v1.2.2"
+            },
+            "time": "2024-06-01T12:12:26+00:00"
+        },
+        {
             "name": "rize/uri-template",
             "version": "0.3.8",
             "source": {
@@ -4431,6 +4497,61 @@
                 }
             ],
             "time": "2024-03-14T22:16:34+00:00"
+        },
+        {
+            "name": "sqids/sqids",
+            "version": "0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sqids/sqids-php.git",
+                "reference": "ff3d1214c0c2119ae4b676cc00f3abb22f61da42"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sqids/sqids-php/zipball/ff3d1214c0c2119ae4b676cc00f3abb22f61da42",
+                "reference": "ff3d1214c0c2119ae4b676cc00f3abb22f61da42",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.3"
+            },
+            "suggest": {
+                "ext-bcmath": "Required to use BC Math arbitrary precision mathematics (*).",
+                "ext-gmp": "Required to use GNU multiple precision mathematics (*)."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sqids\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Generate short YouTube-looking IDs from numbers",
+            "homepage": "https://sqids.org/php",
+            "keywords": [
+                "decode",
+                "encode",
+                "generate",
+                "hashids",
+                "ids",
+                "sqids"
+            ],
+            "support": {
+                "issues": "https://github.com/sqids/sqids-php/issues",
+                "source": "https://github.com/sqids/sqids-php/tree/0.4.1"
+            },
+            "time": "2023-09-12T22:30:42+00:00"
         },
         {
             "name": "symfony/clock",

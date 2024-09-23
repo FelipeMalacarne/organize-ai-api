@@ -59,15 +59,12 @@ class DocumentController extends Controller
      */
     public function update(UpdateRequest $request, int $id)
     {
-        logger($request->all());
         if (! $document = $this->service->getDocumentById($id, $request->user()->id)) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Document not found',
             ], 404);
         }
-
-        logger($request->validated());
 
         $document = $this->service->updateDocument($document, $request->validated());
 
