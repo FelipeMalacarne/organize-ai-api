@@ -12,7 +12,7 @@ interface DocumentService
 
     public function getAllDocuments(int $userId, array $filters = []): LengthAwarePaginator;
 
-    public function getDocumentById(int $id, int $userId): ?Document;
+    public function getDocumentById(string $id, int $userId): ?Document;
 
     public function updateDocument(Document $document, array $data): Document;
 

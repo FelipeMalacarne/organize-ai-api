@@ -15,7 +15,7 @@ class ExtractionResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            'id' => $this->sqid,
             'document' => DocumentResource::make($this->whenLoaded('document')),
             'extracted_text' => $this->extracted_text,
             'created_at' => $this->created_at,

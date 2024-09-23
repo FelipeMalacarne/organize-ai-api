@@ -15,7 +15,7 @@ class SocialAccountResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            'id' => $this->sqid,
             'user' => UserResource::make($this->whenLoaded('user')),
             'provider_name' => $this->provider_name,
             'provider_id' => $this->provider_id,

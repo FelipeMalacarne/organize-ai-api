@@ -8,6 +8,7 @@ use App\Http\Requests\Document\UpdateRequest;
 use App\Http\Requests\Document\UploadRequest;
 use App\Http\Resources\DocumentResource;
 use App\Models\Document;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
@@ -32,7 +33,6 @@ class DocumentController extends Controller
     public function store(UploadRequest $request)
     {
         $validated = $request->validated();
-        logger($request->validated());
 
         $document = $this->service->uploadDocument([
             'user_id' => $request->user()->id,
@@ -47,9 +47,9 @@ class DocumentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Document $document)
+    public function show(string $id)
     {
-        $document = $this->service->getDocumentById($document->id, $document->user_id);
+        $document = $this->service->getDocumentById($id, Auth::user()->id);
 
         return DocumentResource::make($document);
     }

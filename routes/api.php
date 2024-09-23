@@ -4,13 +4,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\PubSubController;
 use App\Http\Controllers\SocialMediaController;
+use App\Http\Resources\UserResource;
 use App\Jobs\EchoOutput;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/user', function (Request $request) {
-    return $request->user();
+    return UserResource::make($request->user()->load('socialAccounts'));
 })->middleware('auth:sanctum');
 
 Route::post('register', [AuthController::class, 'register']);
@@ -22,6 +23,7 @@ Route::get('login/{provider}/callback', [SocialMediaController::class, 'handlePr
 
 Route::middleware('auth:sanctum')->group(function (){
     Route::apiResource('document', DocumentController::class);
+    Route::get('document/{id}/download', [DocumentController::class, 'download']);
 
 });
 

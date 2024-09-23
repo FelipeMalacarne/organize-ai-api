@@ -15,7 +15,7 @@ class DocumentResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            'id' => $this->sqid,
             'user' => UserResource::make($this->whenLoaded('user')),
             'title' => $this->title,
             // 'file_path' => $this->file_path,
