@@ -8,7 +8,6 @@ use App\Http\Requests\Document\UpdateRequest;
 use App\Http\Requests\Document\UploadRequest;
 use App\Http\Resources\DocumentResource;
 use App\Models\Document;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
@@ -33,6 +32,7 @@ class DocumentController extends Controller
     public function store(UploadRequest $request)
     {
         $validated = $request->validated();
+        logger($request->validated());
 
         $document = $this->service->uploadDocument([
             'user_id' => $request->user()->id,
@@ -57,14 +57,17 @@ class DocumentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(UpdateRequest $request, int $id)
     {
+        logger($request->all());
         if (! $document = $this->service->getDocumentById($id, $request->user()->id)) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Document not found'
+                'message' => 'Document not found',
             ], 404);
         }
+
+        logger($request->validated());
 
         $document = $this->service->updateDocument($document, $request->validated());
 
@@ -80,8 +83,8 @@ class DocumentController extends Controller
 
         if (! $document = $this->service->getDocumentById($id, $user->id)) {
             return response()->json([
-            'status' => 'error',
-            'message' => 'Document not found'
+                'status' => 'error',
+                'message' => 'Document not found',
             ], 404);
         }
 
@@ -89,7 +92,7 @@ class DocumentController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Document deleted successfully'
+            'message' => 'Document deleted successfully',
         ]);
     }
 }

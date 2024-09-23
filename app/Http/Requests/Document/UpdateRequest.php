@@ -23,7 +23,10 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'nullable|string|max:255',
+            'tags' => 'nullable|array',
+            'tags.*' => 'string|max:50',
+            'metadata' => 'nullable|array',
         ];
     }
 }

@@ -71,6 +71,8 @@ class DocumentService implements DocumentServiceContract
                 ->map(fn ($tag) => Tag::forUser($document->user_id)->firstOrCreate(['name' => $tag])->id);
 
             $document->tags()->sync($tagIds);
+
+            $document->load('tags');
         }
 
         return $document;
