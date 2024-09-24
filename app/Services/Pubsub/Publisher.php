@@ -3,9 +3,10 @@
 namespace App\Services\Pubsub;
 
 use App\Contracts\PublishableEvent;
+use App\Contracts\PubSubPublisher;
 use Google\Cloud\PubSub\PubSubClient;
 
-class Publisher
+class Publisher implements PubSubPublisher
 {
     public function __construct(
         protected PubSubClient $pubSub,
@@ -15,7 +16,9 @@ class Publisher
     {
         $topicName = $event->topic();
 
-        if (! $topic = $this->pubSub->topic($topicName)) {
+        $topic = $this->pubSub->topic($topicName);
+
+        if (! $topic->exists()) {
             $topic = $this->pubSub->createTopic($topicName);
         }
 

@@ -8,7 +8,6 @@ use App\Contracts\PubSubPublisher;
 use App\Services\DocumentService as DocumentServiceImpl;
 use App\Services\Pubsub\Publisher;
 use App\Services\SocialAuthService;
-use Google\Cloud\PubSub\PubSubClient;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
