@@ -26,7 +26,10 @@ RUN apk --update add wget \
 
 RUN docker-php-ext-install mbstring \
   pdo_pgsql \
-  xml
+  xml \
+  gd \
+  bcmath \
+  zip
 
 COPY . /var/www
 COPY ./infra/nginx.conf /etc/nginx/nginx.conf
