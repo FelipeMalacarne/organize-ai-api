@@ -2,7 +2,7 @@ update_secrets:
 	@gcloud secrets versions add laravel_settings --data-file .env.production
 
 update_deploy:
-	@gcloud run services update laravel --image ${registry_name}/laravel --region ${region}
+	@gcloud run services update laravel --image ${REGISTRY_NAME}/laravel --region ${REGION}
 
 create_deploy:
 	@gcloud run deploy laravel \
