@@ -10,6 +10,7 @@ RUN apk --update add wget \
   grep \
   build-base \
   libmcrypt-dev \
+  libpng-dev \
   libxml2-dev \
   imagemagick-dev \
   pcre-dev \
