@@ -35,7 +35,10 @@ jobs:
 
       - name: Update migrate job
         run: |
-          gcloud run jobs update migrate --image ${REGISTRY_NAME}/laravel --region ${REGION}
+          gcloud run jobs update migrate \
+            --image ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPO_NAME }}/laravel:${{ github.sha }} \
+            --region ${{ secrets.GCP_REGION }} \
+            --quiet
 
       - name: Execute Cloud Run Migrations Job
         run: |
@@ -45,5 +48,5 @@ jobs:
         run: |
           gcloud run services update laravel \
             --image ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_REPO_NAME }}/laravel:${{ github.sha }} \
-            --region ${{secrets.GCP_REGION}} \
+            --region ${{ secrets.GCP_REGION }} \
             --quiet
