@@ -40,4 +40,12 @@ return [
         'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
         'redirect' => env('LINKEDIN_REDIRECT_URI'),
     ],
+
+    'gcp' => [
+        'key_file' => env('GOOGLE_APPLICATION_CREDENTIALS'),
+        'project_id' => env('GOOGLE_CLOUD_PROJECT_ID'),
+        'region' => env('GOOGLE_CLOUD_REGION'),
+        'project_number' => env('GOOGLE_CLOUD_PROJECT_NUMBER'),
+
+    ],
 ];

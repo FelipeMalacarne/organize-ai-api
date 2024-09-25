@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use RedExplosion\Sqids\Concerns\HasSqids;
 
 class SocialAccount extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSqids;
 
     protected $fillable = [
         'user_id',

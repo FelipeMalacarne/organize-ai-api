@@ -1,9 +1,6 @@
 services:
     cloudflare:
         image: cloudflare/cloudflared:2024.5.0
-        depends_on:
-            nginx:
-                condition: service_started
         command: tunnel --no-autoupdate run --token ${CFARGOTUNNEL_TOKEN}
         networks:
             - sail

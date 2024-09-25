@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Document;
+use App\Models\Extraction;
+use App\Models\User;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +17,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        User::factory(5)->create()->each(function ($user) {
+            // Create Documents for each user
+            Document::factory(3)->create(['user_id' => $user->id])->each(function ($document) {
+                // Create Extractions for each document
+                Extraction::factory(2)->create(['document_id' => $document->id]);
+
+                // Attach Tags to each document
+                $tags = Tag::factory(5)->create();
+                $document->tags()->attach($tags->pluck('id')->toArray());
+            });
+        });
+        $this->call([
+            TagSeeder::class,
         ]);
     }
 }
