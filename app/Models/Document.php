@@ -12,7 +12,7 @@ use RedExplosion\Sqids\Concerns\HasSqids;
 
 class Document extends Model
 {
-    use HasFactory, SoftDeletes, HasSqids;
+    use HasFactory, HasSqids, SoftDeletes;
 
     protected $sqidPrefix = 'doc';
 

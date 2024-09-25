@@ -5,7 +5,6 @@ namespace App\Events\Document;
 use App\Contracts\PublishableEvent;
 use App\Models\Document;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
@@ -25,6 +24,7 @@ class Uploaded implements PublishableEvent
     public function data(): array
     {
         logger('Document uploaded', ['document' => $this->document->load('tags')->toArray()]);
+
         return $this->document->load(['tags'])->toArray();
     }
 

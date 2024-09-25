@@ -21,12 +21,11 @@ Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanct
 Route::get('login/{provider}', [SocialMediaController::class, 'redirectToProvider']);
 Route::get('login/{provider}/callback', [SocialMediaController::class, 'handleProviderCallback']);
 
-Route::middleware('auth:sanctum')->group(function (){
+Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('document', DocumentController::class);
     Route::get('document/{id}/download', [DocumentController::class, 'download']);
 
 });
-
 
 Route::get('queue', function () {
     EchoOutput::dispatch(Carbon::now());

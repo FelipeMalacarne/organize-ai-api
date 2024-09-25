@@ -12,7 +12,7 @@ use RedExplosion\Sqids\Concerns\HasSqids;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasSqids;
+    use HasApiTokens, HasFactory, HasSqids, Notifiable;
 
     /**
      * The attributes that are mass assignable.

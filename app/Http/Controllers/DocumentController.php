@@ -7,7 +7,6 @@ use App\Http\Requests\Document\ListAllRequest;
 use App\Http\Requests\Document\UpdateRequest;
 use App\Http\Requests\Document\UploadRequest;
 use App\Http\Resources\DocumentResource;
-use App\Models\Document;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -100,8 +99,9 @@ class DocumentController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Document not found',
-                        ], 404);
+            ], 404);
         }
+
         return $this->service->generateDownloadUrl($document);
     }
 }

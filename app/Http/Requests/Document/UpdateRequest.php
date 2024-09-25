@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Document;
 
-use App\Models\Document;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest

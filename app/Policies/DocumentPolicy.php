@@ -8,7 +8,7 @@ use Illuminate\Auth\Access\Response;
 
 class DocumentPolicy
 {
-      /**
+    /**
      * Determine whether the user can view the document.
      */
     public function view(User $user, Document $document): Response

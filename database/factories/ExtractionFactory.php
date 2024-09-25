@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ExtractionFactory extends Factory
 {
-
     protected $model = \App\Models\Extraction::class;
 
     /**
@@ -23,5 +22,4 @@ class ExtractionFactory extends Factory
             'extracted_text' => $this->faker->paragraphs(3, true),
         ];
     }
-
 }
