@@ -10,11 +10,12 @@ gcloud builds submit --tag=${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/l
 
 echo "Builds has completed successfully."
 
-gcloud run jobs execute migrate --region ${REGION} --wait &
+gcloud run jobs update migrate --image ${REGISTRY_NAME}/laravel --region ${REGION} &
+gcloud run services update laravel --image ${REGISTRY_NAME}/laravel --region ${REGION} &
 
-gcloud run services update laravel \
-    --image ${REGISTRY_NAME}/laravel \
-    --region ${REGION}
+wait
+
+gcloud run jobs execute migrate --region ${REGION} --wait &
 
 wait
 

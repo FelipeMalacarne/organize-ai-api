@@ -23,12 +23,15 @@
           nodejs
           yarn
           postgresql
+          gnumake
           # redis
         ];
 
         shellHook = ''
             export PATH="$PATH:$HOME/.composer/vendor/bin"
             source .env.gcloud
+            gcloud auth activate-service-account --key-file=service-account.json
+            gcloud config set project $PROJECT_ID
             echo "Welcome to the development environment"
         '';
       };

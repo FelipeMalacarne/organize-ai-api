@@ -10,6 +10,7 @@ RUN apk --update add wget \
   grep \
   build-base \
   libmcrypt-dev \
+  libpng-dev \
   libxml2-dev \
   imagemagick-dev \
   pcre-dev \
@@ -26,7 +27,10 @@ RUN apk --update add wget \
 
 RUN docker-php-ext-install mbstring \
   pdo_pgsql \
-  xml
+  xml \
+  gd \
+  bcmath \
+  zip
 
 COPY . /var/www
 COPY ./infra/nginx.conf /etc/nginx/nginx.conf
