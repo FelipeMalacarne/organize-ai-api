@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\DocumentService;
+use App\Exceptions\DocumentException;
 use App\Http\Requests\Document\ListAllRequest;
 use App\Http\Requests\Document\UpdateRequest;
 use App\Http\Requests\Document\UploadRequest;
 use App\Http\Resources\DocumentResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class DocumentController extends Controller
 {
@@ -50,10 +52,7 @@ class DocumentController extends Controller
     {
         $document = $this->service->getDocumentById($id, Auth::user()->id);
         if (! $document) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Document not found',
-            ], 404);
+            throw DocumentException::notFound();
         }
 
         return DocumentResource::make($document);
@@ -65,10 +64,7 @@ class DocumentController extends Controller
     public function update(UpdateRequest $request, string $id)
     {
         if (! $document = $this->service->getDocumentById($id, $request->user()->id)) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Document not found',
-            ], 404);
+            throw DocumentException::notFound();
         }
 
         $document = $this->service->updateDocument($document, $request->validated());
@@ -79,15 +75,12 @@ class DocumentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $id)
+    public function destroy(string $id)
     {
         $user = request()->user();
 
         if (! $document = $this->service->getDocumentById($id, $user->id)) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Document not found',
-            ], 404);
+            throw DocumentException::notFound();
         }
 
         $this->service->deleteDocument($document, $user);
@@ -102,10 +95,7 @@ class DocumentController extends Controller
     {
         $document = $this->service->getDocumentById($id, Auth::user()->id);
         if (! $document) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Document not found',
-            ], 404);
+            throw DocumentException::notFound();
         }
 
         return $this->service->generateDownloadUrl($document);
