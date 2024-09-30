@@ -49,6 +49,12 @@ class DocumentController extends Controller
     public function show(string $id)
     {
         $document = $this->service->getDocumentById($id, Auth::user()->id);
+        if (! $document) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Document not found',
+            ], 404);
+        }
 
         return DocumentResource::make($document);
     }
@@ -56,7 +62,7 @@ class DocumentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, int $id)
+    public function update(UpdateRequest $request, string $id)
     {
         if (! $document = $this->service->getDocumentById($id, $request->user()->id)) {
             return response()->json([
