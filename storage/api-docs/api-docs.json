@@ -424,11 +424,6 @@
                         "description": "Extraction creation timestamp",
                         "type": "string",
                         "format": "date-time"
-                    },
-                    "updated_at": {
-                        "description": "Extraction's last update timestamp",
-                        "type": "string",
-                        "format": "date-time"
                     }
                 },
                 "type": "object"
@@ -447,16 +442,6 @@
                     "name": {
                         "description": "Name of the tag",
                         "type": "string"
-                    },
-                    "created_at": {
-                        "description": "Tag creation timestamp",
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "updated_at": {
-                        "description": "Tag's last update timestamp",
-                        "type": "string",
-                        "format": "date-time"
                     }
                 },
                 "type": "object"
@@ -481,16 +466,6 @@
                         "description": "Email address of the user",
                         "type": "string",
                         "format": "email"
-                    },
-                    "created_at": {
-                        "description": "User creation timestamp",
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "updated_at": {
-                        "description": "User's last update timestamp",
-                        "type": "string",
-                        "format": "date-time"
                     }
                 },
                 "type": "object"
