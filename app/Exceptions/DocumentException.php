@@ -13,11 +13,11 @@ class DocumentException extends Exception implements ShouldntReport
         return new self('Document not found', 404);
     }
 
-     public function render():  JsonResponse
+    public function render(): JsonResponse
     {
         return response()->json([
             'status' => 'error',
-            'message' => $this->getMessage()
+            'message' => $this->getMessage(),
         ], $this->getCode());
     }
 }

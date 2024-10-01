@@ -11,6 +11,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     type="object",
  *     title="Extraction",
  *     required={"id", "content"},
+ *
  *     @OA\Property(
  *         property="id",
  *         type="string",

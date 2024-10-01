@@ -11,6 +11,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     type="object",
  *     title="Tag",
  *     required={"id", "name"},
+ *
  *     @OA\Property(
  *         property="id",
  *         type="string",

@@ -11,6 +11,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *     type="object",
  *     title="Document",
  *     required={"id", "title", "file_type"},
+ *
  *     @OA\Property(
  *         property="id",
  *         type="string",
@@ -40,14 +41,18 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *         property="tags",
  *         type="array",
  *         description="Tags associated with the document",
+ *
  *         @OA\Items(ref="#/components/schemas/TagResource")
  *     ),
+ *
  *     @OA\Property(
  *         property="extractions",
  *         type="array",
  *         description="Extraction data from the document",
+ *
  *         @OA\Items(ref="#/components/schemas/ExtractionResource")
  *     ),
+ *
  *     @OA\Property(
  *         property="created_at",
  *         type="string",
