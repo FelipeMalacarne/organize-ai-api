@@ -18,7 +18,7 @@ class TagFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->word,
-            'user_id' => \App\Models\User::factory(),
+            'user_id' => null,
         ];
     }
 }
