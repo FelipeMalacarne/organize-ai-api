@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Tag\ListAllRequest;
+use App\Http\Requests\Tag\StoreRequest;
 use App\Http\Resources\TagResource;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -24,19 +25,15 @@ class TagController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $user = $request->user();
+
+        $tag = $user->tags()->create(['name' => $request->name]);
+
+        return TagResource::make($tag)->response()->setStatusCode(201);
     }
 
     /**
