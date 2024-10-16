@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\PubSubController;
 use App\Http\Controllers\SocialMediaController;
+use App\Http\Controllers\TagController;
 use App\Http\Resources\UserResource;
 use App\Jobs\EchoOutput;
 use Carbon\Carbon;
@@ -23,6 +24,7 @@ Route::get('login/{provider}/callback', [SocialMediaController::class, 'handlePr
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('document', DocumentController::class);
+    Route::apiResource('tag', TagController::class);
     Route::get('document/{id}/download', [DocumentController::class, 'download']);
 
 });
