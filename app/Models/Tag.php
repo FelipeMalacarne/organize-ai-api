@@ -20,6 +20,11 @@ class Tag extends Model
         'name',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'sqid';
+    }
+
     public function documents(): BelongsToMany
     {
         return $this->belongsToMany(Document::class)->withTimestamps();

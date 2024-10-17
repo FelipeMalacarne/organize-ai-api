@@ -74,7 +74,6 @@ class TagControllerTest extends TestCase
             'data' => [
                 'id',
                 'name',
-                // Include other TagResource fields if applicable
             ],
         ]);
 
@@ -146,5 +145,27 @@ class TagControllerTest extends TestCase
         $response->assertStatus(422); // 422 Unprocessable Entity
 
         $response->assertJsonValidationErrors(['name']);
+    }
+
+    public function test_show_returns_specific_tag()
+    {
+        $user = User::factory()->create();
+
+        // Create a tag for the user
+        $tag = Tag::factory()->create([
+            'user_id' => $user->id,
+        ]);
+
+        // Act as the user and request the specific tag
+        $response = $this->actingAs($user, 'sanctum')->getJson(route('tag.show', $tag->sqid));
+
+        $response->assertStatus(200);
+
+        $response->assertJson([
+            'data' => [
+                'id' => $tag->sqid,
+                'name' => $tag->name,
+            ],
+        ]);
     }
 }

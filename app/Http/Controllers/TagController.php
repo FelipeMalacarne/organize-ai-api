@@ -36,12 +36,12 @@ class TagController extends Controller
         return TagResource::make($tag)->response()->setStatusCode(201);
     }
 
-    /**
+    /*
      * Display the specified resource.
      */
     public function show(Tag $tag)
     {
-        //
+        return TagResource::make($tag);
     }
 
     /**
