@@ -3,13 +3,16 @@
 namespace App\Providers;
 
 use App\Models\Document;
+use App\Models\Tag;
 use App\Policies\DocumentPolicy;
+use App\Policies\TagPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
     protected $policies = [
         Document::class => DocumentPolicy::class,
+        Tag::class => TagPolicy::class,
     ];
 
     /**
