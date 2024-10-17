@@ -1,0 +1,506 @@
+{
+	"info": {
+		"_postman_id": "a68ee777-e686-4f4c-aa10-bd9793031155",
+		"name": "organize-ai-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28685533"
+	},
+	"item": [
+		{
+			"name": "authenticated",
+			"item": [
+				{
+					"name": "document",
+					"item": [
+						{
+							"name": "list",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL}}/api/document",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"document"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "download",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/document",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"document"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/document/doc_z32FikVuL6",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"document",
+										"doc_z32FikVuL6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL}}/api/document/doc_huApUvuics",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"document",
+										"doc_huApUvuics"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"sassss\",\n    \"tags\": [\"laravel\", \"php\"],\n        \"metadata\": {\n            \"description\": \"This is an updated description.\"\n        }\n}"
+								},
+								"url": {
+									"raw": "{{URL}}/api/document/doc_z32FikVuL6",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"document",
+										"doc_z32FikVuL6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "document",
+											"type": "file",
+											"src": "/Users/FelipeMalacarne/Documents/teste.pdf"
+										},
+										{
+											"key": "title",
+											"value": "sec doc",
+											"type": "text"
+										},
+										{
+											"key": "tags[0]",
+											"value": "personal",
+											"type": "text"
+										},
+										{
+											"key": "tags[1]",
+											"value": "testefodase",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/api/document",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"document"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "tag",
+					"item": [
+						{
+							"name": "list",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL}}/api/tag",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"tag"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL}}/api/tag/tag_p2PkzEfHI7",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"tag",
+										"tag_p2PkzEfHI7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"teste\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/tag",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"tag"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"teste updated\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/tag/tag_p2PkzEfHI7",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"tag",
+										"tag_p2PkzEfHI7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"teste updated\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/tag/tag_p2PkzEfHI7",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"tag",
+										"tag_p2PkzEfHI7"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "5|AeR6FlEm2qcOR2eF56rF7dYc1saHtfwZhG4Qitkw5c409f00",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"felipe\",\n    \"email\": \"felipe@gmail.com\",\n    \"password\": \"123123\",\n    \"password_confirmation\": \"123123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/register",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"felipe@gmail.com\",\n    \"password\": \"123123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "URL",
+			"value": "https://organizeai.web.app",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "URL",
+			"value": "https://laravel-538699454566.southamerica-east1.run.app",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
