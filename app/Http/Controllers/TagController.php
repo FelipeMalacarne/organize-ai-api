@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Tag\ListAllRequest;
 use App\Http\Requests\Tag\StoreRequest;
+use App\Http\Requests\Tag\UpdateRequest;
 use App\Http\Resources\TagResource;
 use App\Models\Tag;
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class TagController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
@@ -45,19 +48,15 @@ class TagController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Tag $tag)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tag $tag)
+    public function update(UpdateRequest $request, Tag $tag)
     {
-        //
+        // Authorization is handled in UpdateRequest via TagPolicy
+
+        $tag->update(['name' => $request->name]);
+
+        return TagResource::make($tag);
     }
 
     /**
@@ -65,6 +64,10 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $this->authorize('delete', $tag);
+
+        $tag->delete();
+
+        return response()->json(null, 204); // 204 No Content
     }
 }

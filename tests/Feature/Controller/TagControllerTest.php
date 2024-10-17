@@ -147,6 +147,11 @@ class TagControllerTest extends TestCase
         $response->assertJsonValidationErrors(['name']);
     }
 
+    /**
+     * Test the show method of TagController.
+     *
+     * @return void
+     */
     public function test_show_returns_specific_tag()
     {
         $user = User::factory()->create();
@@ -167,5 +172,157 @@ class TagControllerTest extends TestCase
                 'name' => $tag->name,
             ],
         ]);
+    }
+
+    /**
+     * Test the update method of TagController.
+     *
+     * @return void
+     */
+    public function test_update_modifies_existing_tag()
+    {
+        $user = User::factory()->create();
+
+        $tag = Tag::factory()->create([
+            'name' => 'Old Tag',
+            'user_id' => $user->id,
+        ]);
+
+        $payload = [
+            'name' => 'Updated Tag',
+        ];
+
+        $response = $this->actingAs($user, 'sanctum')->putJson(route('tag.update', $tag->sqid), $payload);
+
+        $response->assertStatus(200);
+
+        $response->assertJson([
+            'data' => [
+                'id' => $tag->sqid,
+                'name' => 'Updated Tag',
+            ],
+        ]);
+
+        $this->assertDatabaseHas('tags', [
+            'id' => $tag->id,
+            'name' => 'Updated Tag',
+            'user_id' => $user->id,
+        ]);
+    }
+
+    /**
+     * Test updating a tag with invalid data.
+     *
+     * @return void
+     */
+    public function test_update_validation_errors()
+    {
+        $user = User::factory()->create();
+
+        $tag = Tag::factory()->create([
+            'name' => 'Valid Tag',
+            'user_id' => $user->id,
+        ]);
+
+        // Attempt to update with an empty name
+        $payload = [
+            'name' => '',
+        ];
+
+        $response = $this->actingAs($user, 'sanctum')->putJson(route('tag.update', $tag->sqid), $payload);
+
+        $response->assertStatus(422); // 422 Unprocessable Entity
+
+        $response->assertJsonValidationErrors(['name']);
+    }
+
+    /**
+     * Test unauthorized update attempts.
+     *
+     * @return void
+     */
+    public function test_update_requires_authorization()
+    {
+        $user = User::factory()->create();
+        $otherUser = User::factory()->create();
+
+        $tag = Tag::factory()->create([
+            'name' => 'Other User Tag',
+            'user_id' => $otherUser->id,
+        ]);
+
+        $payload = [
+            'name' => 'Attempted Update',
+        ];
+
+        // Attempt to update another user's tag
+        $response = $this->actingAs($user, 'sanctum')->putJson(route('tag.update', $tag->sqid), $payload);
+
+        $response->assertStatus(403); // 403 Forbidden
+    }
+
+    /**
+     * Test the destroy method of TagController.
+     *
+     * @return void
+     */
+    public function test_destroy_deletes_existing_tag()
+    {
+        $user = User::factory()->create();
+
+        $tag = Tag::factory()->create([
+            'name' => 'Tag to Delete',
+            'user_id' => $user->id,
+        ]);
+
+        $response = $this->actingAs($user, 'sanctum')->deleteJson(route('tag.destroy', $tag->sqid));
+
+        $response->assertStatus(204); // 204 No Content
+
+        $this->assertDatabaseMissing('tags', [
+            'id' => $tag->id,
+            'name' => 'Tag to Delete',
+            'user_id' => $user->id,
+        ]);
+    }
+
+    /**
+     * Test unauthorized delete attempts.
+     *
+     * @return void
+     */
+    public function test_destroy_requires_authorization()
+    {
+        $user = User::factory()->create();
+        $otherUser = User::factory()->create();
+
+        $tag = Tag::factory()->create([
+            'name' => 'Other User Tag',
+            'user_id' => $otherUser->id,
+        ]);
+
+        $response = $this->actingAs($user, 'sanctum')->deleteJson(route('tag.destroy', $tag->sqid));
+
+        $response->assertStatus(403); // 403 Forbidden
+
+        $this->assertDatabaseHas('tags', [
+            'id' => $tag->id,
+            'name' => 'Other User Tag',
+            'user_id' => $otherUser->id,
+        ]);
+    }
+
+    /**
+     * Test that deleting a tag requires authentication.
+     *
+     * @return void
+     */
+    public function test_destroy_requires_authentication()
+    {
+        $tag = Tag::factory()->create();
+
+        $response = $this->deleteJson(route('tag.destroy', $tag->sqid));
+
+        $response->assertStatus(401); // 401 Unauthorized
     }
 }
