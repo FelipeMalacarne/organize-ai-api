@@ -24,7 +24,7 @@ Route::get('login/{provider}/callback', [SocialMediaController::class, 'handlePr
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('document', DocumentController::class);
-    Route::apiResource('tag', TagController::class);
+    Route::apiResource('tags', TagController::class);
     Route::get('document/{id}/download', [DocumentController::class, 'download']);
 
 });
