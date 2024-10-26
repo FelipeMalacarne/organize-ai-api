@@ -13,7 +13,9 @@ abstract class DocumentEvent
 
     public function __construct(
         protected Document $document,
-    ) {}
+    ) {
+        logger('Document event created');
+    }
 
     public function document(): Document
     {

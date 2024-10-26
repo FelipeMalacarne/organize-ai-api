@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\Document\Created;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,6 +27,10 @@ class Document extends Model
 
     protected $casts = [
         'metadata' => 'array',
+    ];
+
+    protected $dispatchesEvents = [
+        'created' => Created::class,
     ];
 
     public function user(): BelongsTo

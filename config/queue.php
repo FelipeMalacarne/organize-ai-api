@@ -43,26 +43,6 @@ return [
             'after_commit' => false,
         ],
 
-        'beanstalkd' => [
-            'driver' => 'beanstalkd',
-            'host' => env('BEANSTALKD_QUEUE_HOST', 'localhost'),
-            'queue' => env('BEANSTALKD_QUEUE', 'default'),
-            'retry_after' => (int) env('BEANSTALKD_QUEUE_RETRY_AFTER', 90),
-            'block_for' => 0,
-            'after_commit' => false,
-        ],
-
-        'sqs' => [
-            'driver' => 'sqs',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'prefix' => env('SQS_PREFIX', 'https://sqs.us-east-1.amazonaws.com/your-account-id'),
-            'queue' => env('SQS_QUEUE', 'default'),
-            'suffix' => env('SQS_SUFFIX'),
-            'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
-            'after_commit' => false,
-        ],
-
         'redis' => [
             'driver' => 'redis',
             'connection' => env('REDIS_QUEUE_CONNECTION', 'default'),
@@ -81,6 +61,17 @@ return [
             'subscriber' => 'dev-laravel-queue-sub',
             'create_topics' => true,
             'create_subscriptions' => true,
+        ],
+
+        'cloudtasks' => [
+            'driver' => 'cloudtasks',
+            'project' => env('GOOGLE_CLOUD_PROJECT_ID', ''),
+            'location' => env('GOOGLE_CLOUD_REGION', ''),
+            'queue' => env('CLOUD_TASKS_QUEUE', 'default'),
+            'service_account_email' => env('GOOGLE_CLOUD_SERVICE_EMAIL'),
+            'handler' => env('CLOUD_TASKS_HANDLER'),
+            'backoff' => 0,
+            'retries' => 3,
         ],
     ],
 
