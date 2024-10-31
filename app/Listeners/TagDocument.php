@@ -20,7 +20,7 @@ class TagDocument implements ShouldQueue
      */
     public function handle(DocumentCreated $event): void
     {
-        logger('Tagging document'.$event->document()->id());
+        logger('Tagging document'.$event->document()->id);
 
         $event->document()->load(['tags']);
 
@@ -31,6 +31,6 @@ class TagDocument implements ShouldQueue
                 'name' => $item['label'],
             ]));
 
-        logger('Document tagged'.$event->document()->id());
+        logger('Document tagged'.$event->document()->id);
     }
 }
