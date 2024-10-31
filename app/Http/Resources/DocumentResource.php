@@ -78,6 +78,7 @@ class DocumentResource extends JsonResource
     {
         return [
             'id' => $this->sqid,
+            'resource' => 'document',
             'user' => UserResource::make($this->whenLoaded('user')),
             'title' => $this->title,
             // 'file_path' => $this->file_path,

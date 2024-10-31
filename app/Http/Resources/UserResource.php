@@ -41,6 +41,7 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->sqid,
+            'resource' => 'user',
             'name' => $this->name,
             'email' => $this->email,
             'social_accounts' => SocialAccountResource::collection($this->whenLoaded('socialAccounts')),
