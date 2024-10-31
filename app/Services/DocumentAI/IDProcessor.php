@@ -8,6 +8,7 @@ use Google\Cloud\DocumentAI\V1\Client\DocumentProcessorServiceClient;
 use Google\Cloud\DocumentAI\V1\GcsDocument;
 use Google\Cloud\DocumentAI\V1\ProcessRequest;
 use Illuminate\Http\Testing\MimeType;
+use Illuminate\Support\Collection;
 
 class IDProcessor implements DocumentProcessor
 {
@@ -15,7 +16,7 @@ class IDProcessor implements DocumentProcessor
         protected DocumentProcessorServiceClient $client,
     ) {}
 
-    public function process(string $filePath): array
+    public function process(string $filePath): Collection
     {
         $request = new ProcessRequest([
             'name' => ProcessorEnum::Extractor->fullyQualifiedName(),
@@ -39,6 +40,6 @@ class IDProcessor implements DocumentProcessor
             ];
         }
 
-        return $structuredData;
+        return collect($structuredData);
     }
 }
