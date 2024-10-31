@@ -12,4 +12,12 @@ enum ProcessorEnum: string {
     {
         return DocumentProcessorServiceClient::processorName(config('services.gcp.project_id'), 'us', $this->value);
     }
+
+    public static function fromName(string $name): ProcessorEnum
+    {
+        return match ($name) {
+            'Classifier' => self::Classifier,
+            'Extractor' => self::Extractor,
+        };
+    }
 }

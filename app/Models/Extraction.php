@@ -15,7 +15,9 @@ class Extraction extends Model
      */
     protected $fillable = [
         'document_id',
+        'type',
         'extracted_text',
+        'extracted_json',
     ];
 
     /**
