@@ -22,11 +22,11 @@ class TagDocument implements ShouldQueue
 
         $data = $this->processor->process($event->document()->file_path);
 
-        ExtractionCompleted::dispatch([
-            'document' => $event->document(),
-            'data' => $data,
-            'type' => ProcessorEnum::Classifier,
-        ]);
+        dispatch(new ExtractionCompleted(
+            $event->document(),
+            $data->toArray(),
+            ProcessorEnum::Classifier
+        ));
 
         $data->filter(fn ($item) => $item['confidence'] > 0.8)
             ->each(fn ($item) => $event->document()->tags()->firstOrCreate([
