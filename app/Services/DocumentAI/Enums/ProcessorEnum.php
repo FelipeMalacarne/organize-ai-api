@@ -20,4 +20,12 @@ enum ProcessorEnum: string {
             'Extractor' => self::Extractor,
         };
     }
+
+    public function outputFormat(): string
+    {
+        return match ($this) {
+            self::Classifier => 'json',
+            self::Extractor => 'text',
+        };
+    }
 }
