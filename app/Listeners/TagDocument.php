@@ -22,7 +22,7 @@ class TagDocument implements ShouldQueue
 
         $data = $this->processor->process($event->document()->file_path);
 
-        dispatch(new ExtractionCompleted(
+        event(new ExtractionCompleted(
             $event->document(),
             $data->toArray(),
             ProcessorEnum::Classifier
