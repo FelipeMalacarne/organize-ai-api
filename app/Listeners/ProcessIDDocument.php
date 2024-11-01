@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\Document\Created as DocumentCreated;
 use App\Events\Extraction\Completed as ExtractionCompleted;
 use App\Services\DocumentAI\Enums\ProcessorEnum;
 use App\Services\DocumentAI\IDProcessor;
@@ -13,7 +14,7 @@ class ProcessIDDocument implements ShouldQueue
         protected IDProcessor $processor,
     ) {}
 
-    public function handle(object $event): void
+    public function handle(DocumentCreated $event): void
     {
         logger('Processing document using ID processor, id: '.$event->document()->id);
 
