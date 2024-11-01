@@ -25,6 +25,7 @@ class Extraction extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
     /**
      * Get the document that owns the extraction.
      */
