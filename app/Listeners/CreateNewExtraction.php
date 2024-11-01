@@ -18,11 +18,7 @@ class CreateNewExtraction
             'type' => $event->type()->name,
         ]);
 
-        if ($event->type()->outputFormat() == 'json') {
-            $extraction->extracted_json = $event->data();
-        } elseif ($event->type()->outputFormat() == 'text') {
-            $extraction->extracted_text = $event->data();
-        }
+        $extraction->extracted_json = $event->data();
 
         $event->document()->extractions()->save($extraction);
 
