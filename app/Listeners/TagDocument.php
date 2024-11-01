@@ -3,7 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\Document\Created as DocumentCreated;
-use App\Events\Extraction\Completed as ExtractionCompleted;
 use App\Services\DocumentAI\Enums\ProcessorEnum;
 use App\Services\DocumentAI\TagProcessor;
 use Illuminate\Contracts\Queue\ShouldQueue;

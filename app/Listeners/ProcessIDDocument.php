@@ -3,7 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\Document\Created as DocumentCreated;
-use App\Events\Extraction\Completed as ExtractionCompleted;
 use App\Services\DocumentAI\Enums\ProcessorEnum;
 use App\Services\DocumentAI\IDProcessor;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -20,9 +19,11 @@ class ProcessIDDocument implements ShouldQueue
 
         $data = $this->processor->process($event->document()->file_path);
 
+        $formatted_data = $data->mapWithKeys(fn ($item) => [$item['field'] => $item['normalized_value'] ?? $item['value']])->toArray();
+
         $event->document()->extractions()->create([
             'type' => ProcessorEnum::Extractor->name,
-            'extracted_json' => $data->toArray(),
+            'extracted_json' => $formatted_data,
         ]);
 
         logger('Document processed using ID processor, id: '.$event->document()->id);
