@@ -3,7 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\Document\Created as DocumentCreated;
-use App\Events\Extraction\Completed as ExtractionCompleted;
 use App\Services\DocumentAI\Enums\ProcessorEnum;
 use App\Services\DocumentAI\TagProcessor;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -22,11 +21,10 @@ class TagDocument implements ShouldQueue
 
         $data = $this->processor->process($event->document()->file_path);
 
-        event(new ExtractionCompleted(
-            $event->document(),
-            $data->toArray(),
-            ProcessorEnum::Classifier
-        ));
+        $event->document()->extractions()->create([
+            'type' => ProcessorEnum::Classifier->name,
+            'extracted_json' => $data->toArray(),
+        ]);
 
         $data->filter(fn ($item) => $item['confidence'] > 0.8)
             ->each(fn ($item) => $event->document()->tags()->firstOrCreate([
