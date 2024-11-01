@@ -2,11 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Services\DocumentAI\IDProcessor;
-use Illuminate\Contracts\Queue\ShouldQueue;
-
 use App\Events\Extraction\Completed as ExtractionCompleted;
 use App\Services\DocumentAI\Enums\ProcessorEnum;
+use App\Services\DocumentAI\IDProcessor;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ProcessIDDocument implements ShouldQueue
 {
