@@ -20,11 +20,10 @@ class ProcessIDDocument implements ShouldQueue
 
         $data = $this->processor->process($event->document()->file_path);
 
-        event(new ExtractionCompleted(
-            $event->document(),
-            $data->toArray(),
-            ProcessorEnum::Extractor
-        ));
+        $event->document()->extractions()->create([
+            'type' => ProcessorEnum::Extractor->name,
+            'extracted_json' => $data->toArray(),
+        ]);
 
         logger('Document processed using ID processor, id: '.$event->document()->id);
     }
