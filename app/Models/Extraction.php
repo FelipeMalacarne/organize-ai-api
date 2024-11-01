@@ -20,6 +20,11 @@ class Extraction extends Model
         'extracted_json',
     ];
 
+    protected $casts = [
+        'extracted_json' => 'array',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
     /**
      * Get the document that owns the extraction.
      */

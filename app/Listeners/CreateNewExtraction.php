@@ -11,7 +11,7 @@ class CreateNewExtraction
     {
         logger('Creating new extraction', [
             'document' => $event->document()->id,
-            'type' => $event->type(),
+            'type' => $event->type()->name,
         ]);
 
         $extraction = new Extraction([
