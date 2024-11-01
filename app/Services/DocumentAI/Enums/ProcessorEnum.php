@@ -19,6 +19,7 @@ enum ProcessorEnum: string
         return match ($name) {
             'Classifier' => self::Classifier,
             'Extractor' => self::Extractor,
+            'OCR' => self::Extractor,
         };
     }
 
@@ -26,7 +27,7 @@ enum ProcessorEnum: string
     {
         return match ($this) {
             self::Classifier => 'json',
-            self::Extractor => 'text',
+            self::Extractor => 'json',
         };
     }
 }
