@@ -45,7 +45,7 @@ class ExtractionResource extends JsonResource
             'document' => DocumentResource::make($this->whenLoaded('document')),
             'type' => $this->type,
             'extracted_text' => $this->extracted_text,
-            'extracted_resource' => $this->extracted_resource,
+            'extracted_json' => $this->extracted_json,
             'created_at' => $this->created_at,
         ];
     }
