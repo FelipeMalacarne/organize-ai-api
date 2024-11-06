@@ -48,6 +48,15 @@ class DocumentService implements DocumentServiceContract
             $query->where('title', 'like', '%'.$title.'%');
         }
 
+        if ($tag = Arr::get($filters, 'tag')) {
+            $query->whereHas('tags', fn ($q) => $q->where('name', $tag));
+        }
+
+        if ($orderBy = Arr::get($filters, 'order_by', 'created_at')) {
+            $order = Arr::get($filters, 'order', 'desc');
+            $query->orderBy($orderBy, $order);
+        }
+
         return $query->paginate(Arr::get($filters, 'limit', 20), ['*'], 'page', Arr::get($filters, 'page', 1));
     }
 

@@ -24,13 +24,33 @@
 									}
 								],
 								"url": {
-									"raw": "{{URL}}/api/document",
+									"raw": "{{URL}}/api/document?order_by=title&order=asc",
 									"host": [
 										"{{URL}}"
 									],
 									"path": [
 										"api",
 										"document"
+									],
+									"query": [
+										{
+											"key": "title",
+											"value": "tag",
+											"disabled": true
+										},
+										{
+											"key": "tag",
+											"value": "rg",
+											"disabled": true
+										},
+										{
+											"key": "order_by",
+											"value": "title"
+										},
+										{
+											"key": "order",
+											"value": "asc"
+										}
 									]
 								}
 							},
@@ -154,22 +174,24 @@
 										{
 											"key": "document",
 											"type": "file",
-											"src": "/Users/FelipeMalacarne/Documents/teste.pdf"
+											"src": "/Users/FelipeMalacarne/rgs-dataset/v61053_2ZZu0EwdFKC2PhzSINuI9e4HACQEXpnq.jpg"
 										},
 										{
 											"key": "title",
-											"value": "sec doc",
+											"value": "outra tag",
 											"type": "text"
 										},
 										{
 											"key": "tags[0]",
 											"value": "personal",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "tags[1]",
 											"value": "testefodase",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										}
 									]
 								},
@@ -203,13 +225,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{URL}}/api/tag",
+									"raw": "{{URL}}/api/tags",
 									"host": [
 										"{{URL}}"
 									],
 									"path": [
 										"api",
-										"tag"
+										"tags"
 									]
 								}
 							},
@@ -227,13 +249,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{URL}}/api/tag/tag_p2PkzEfHI7",
+									"raw": "{{URL}}/api/tags/tag_p2PkzEfHI7",
 									"host": [
 										"{{URL}}"
 									],
 									"path": [
 										"api",
-										"tag",
+										"tags",
 										"tag_p2PkzEfHI7"
 									]
 								}
@@ -294,13 +316,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{URL}}/api/tag/tag_p2PkzEfHI7",
+									"raw": "{{URL}}/api/tags/tag_p2PkzEfHI7",
 									"host": [
 										"{{URL}}"
 									],
 									"path": [
 										"api",
-										"tag",
+										"tags",
 										"tag_p2PkzEfHI7"
 									]
 								}
@@ -328,13 +350,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{URL}}/api/tag/tag_p2PkzEfHI7",
+									"raw": "{{URL}}/api/tags/tag_p2PkzEfHI7",
 									"host": [
 										"{{URL}}"
 									],
 									"path": [
 										"api",
-										"tag",
+										"tags",
 										"tag_p2PkzEfHI7"
 									]
 								}
@@ -367,7 +389,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "5|AeR6FlEm2qcOR2eF56rF7dYc1saHtfwZhG4Qitkw5c409f00",
+						"value": "10|95D4QwiBrkGmBKtP7yDJeuk597yI42ZI73eztXTR6243c808",
 						"type": "string"
 					}
 				]

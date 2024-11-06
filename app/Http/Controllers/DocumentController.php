@@ -31,7 +31,7 @@ class DocumentController extends Controller
             'user_id' => $request->user()->id,
             'title' => $validated['title'],
             'metadata' => $validated['metadata'] ?? [],
-            'tags' => $validated['tags'],
+            'tags' => $validated['tags'] ?? [],
         ], $request->file('document'));
 
         return DocumentResource::make($document);

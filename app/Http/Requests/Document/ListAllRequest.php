@@ -26,6 +26,9 @@ class ListAllRequest extends FormRequest
             'limit' => ['integer', 'min:1', 'max:100'],
             'page' => ['integer', 'min:1'],
             'title' => ['string', 'max:255'],
+            'tag' => ['string', 'exists:tags,name'],
+            'order_by' => ['string', 'in:created_at,title,updated_at,id'],
+            'order' => ['string', 'in:asc,desc'],
         ];
     }
 }
